@@ -1,0 +1,33 @@
+
+body{
+    font-family: Century Gothic;
+    text-align: center;
+    background-color: antiquewhite;
+}
+
+h1{
+    text-align: center;
+}
+
+#page1{
+    text-align: center;
+}
+
+#begin{
+    text-align: center;
+    scale: 1.5;
+}
+
+button:hover{
+    transform: scale(1.5);
+    transition: transform .2s;
+}
+
+#page2{
+    text-align: inline-block;
+}
+
+
+#IncomeCategory{
+    text-align:center;
+}

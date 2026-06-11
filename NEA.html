@@ -1,14 +1,94 @@
 <title>NEA</title>
-<link rel="stylesheet" href="Style.css">
+<link rel="stylesheet" href="NEA.css">
 
-<body id="body">
+<body>
     <h1>Budgeting</h1>
-    <div>
-        <button id="menu" onclick="enter()">Begin</button>
+    
+    
+    
+    <!-- Main Menu -->
+    <div id="page1">
+        <button id="Income" onclick="websiteGoTo('page2')">Income</button> <br><br>
+        <button id="Expenses" onclick="websiteGoTo('page3')">Expenses</button> <br><br>
+        <button id="Dashboard" onclick="websiteGoTo('page4')">Dashboard</button>
     </div>
 
 
 
+
+
+    <!-- Income Category -->
+    <div id="page2" style="display: none;">
+        <h2>Income</h2>
+        <br><output>Wage = £</output><input id="wage" placeholder=" monthly wage" value="" type="number" min="0">
+        <br><br><br><output>Irregular Income = £</output><input id="IrregularIncome" placeholder=" Irregular Income" value="" type="number" min="0">
+        
+        <br><br><br><button id="IncomeSubmit" onclick="TotalIncome()">Submit</button>
+        
+        
+        <!-- Custom Incomes-->
+        <button id="CustomIncome" onclick="CustomIncome()">Add Custom Item</button>
+        <br><br><br><input id="CustomIncome1" style="display: none;" value="0" type="number" min="0">
+        <button id="RemoveCustomIncome1" style="display:none;" onclick="RemoveCustom('CustomIncome1', 'RemoveCustomIncome1')">Remove</button>
+        <br><br><br><input id="CustomIncome2" style="display: none" value="0" type="number" min="0">
+        <button id="RemoveCustomIncome2" style="display:none;" onclick="RemoveCustom('CustomIncome2', 'RemoveCustomIncome2')">Remove</button>
+        <br><br><br><output id="TotalIncome">
+    </div>
+
+
+
+
+
+    <!-- Expenses Category -->
+    <div id="page3" style="display: none;">
+        <h2>Expenses</h2>
+        <h3>Housing</h3>
+            <br><output>Mortgage/Rent = £</output><input id="Rent" placeholder="Monthly rent" value="" type="number" min="0">
+            <br><br><br><output>Electric = £</output><input id="Electric" placeholder="Electric Bill" value="" type="number" min="0">
+            <br><br><br><output>Water = £</output><input id="Water" placeholder="Water Bill" value="" type="number" min="0">
+            <br><br><br><output>Gas = £</output><input id="Gas" placeholder="Gas Bill" value="" type="number" min="0">
+            <br><br>
+
+
+        <h3>Personal</h3>
+            <br><output>Clothing = £</output><input id="Clothing" placeholder="Clothing Costs" value="" type="number" min="0">
+            <br><br><br><output>Phone = £</output><input id="Phone" placeholder="Phone Bill" value="" type="number" min="0">
+            <br><br><br><output>Subscriptions = £</output><input id="Subs" placeholder="Subscriptions Costs" value="" type="number" min="0">
+            <br><br>
+   
+        <h3>Food</h3>
+            <br><output>Groceries = £</output><input id="Groceries" placeholder="Monthly Groceries Cost" value="" type="number" min="0">
+            <br><br><br><output>Eating Out = £</output><input id="Eat-Out" placeholder="Eating-out Fund" value="" type="number" min="0">
+
+        <br><br><br><button id="ExpenseSubmit" onclick="TotalExpense()">Submit</button>
+        
+        
+        <!-- Custom Expenses-->
+        <button id="CustomExpense" onclick="CustomExpense()">Add Custom Item</button>
+        <br><br><br><input id="CustomExpense1" style="display: none;" value="0">
+        <button id="RemoveCustomExpense1" style="display:none;" onclick="RemoveCustom('CustomExpense1', 'RemoveCustomExpense1')">Remove</button>
+        <br><br><br><input id="CustomExpense2" style="display: none;" value="0">
+        <button id="RemoveCustomExpense2" style="display:none;" onclick="RemoveCustom('CustomExpense2', 'RemoveCustomExpense2')">Remove</button>
+        
+        <br><br><br><output id="TotalExpense">
+    </div>
+
+    
+
+
+
+
+    <!-- Dashboard -->
+    <div id="page4" style="display: none;">
+        <h2>Dashboard</h2>
+        <h3>Total Income</h3>
+        <output id="TotalIncome"></output>
+
+    </div>
+
+    <!-- Main Menu Button -->
+    <br><br><br><br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('page1')">Main Menu</button>
+
 </body>
 
-<script type="module" src="NEA.js"></script>
+<script src="NEA.js"></script>
