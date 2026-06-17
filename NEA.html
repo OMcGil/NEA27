@@ -8,9 +8,10 @@
     
     <!-- Main Menu -->
     <div id="page1">
-        <button id="Income" onclick="websiteGoTo('page2')">Income</button> <br><br>
-        <button id="Expenses" onclick="websiteGoTo('page3')">Expenses</button> <br><br>
-        <button id="Dashboard" onclick="websiteGoTo('page4')">Dashboard</button>
+        <button id="IncomePage" onclick="websiteGoTo('page2')">Income</button> <br><br>
+        <button id="ExpensesPage" onclick="websiteGoTo('page3')">Expenses</button> <br><br>
+        <button id="SavingsPage" onclick="websiteGoTo('page4')">Savings</button><br><br>
+        <button id="DashboardPage" onclick="websiteGoTo('page5'); TotalIncome(); TotalExpense(); CalcProfit()">Dashboard</button>
     </div>
 
 
@@ -32,7 +33,7 @@
         <button id="RemoveCustomIncome1" style="display:none;" onclick="RemoveCustom('CustomIncome1', 'RemoveCustomIncome1')">Remove</button>
         <br><br><br><input id="CustomIncome2" style="display: none" value="0" type="number" min="0">
         <button id="RemoveCustomIncome2" style="display:none;" onclick="RemoveCustom('CustomIncome2', 'RemoveCustomIncome2')">Remove</button>
-        <br><br><br><output id="TotalIncome">
+        <br><br><output id="TotalIncome"></output>
     </div>
 
 
@@ -51,7 +52,8 @@
 
 
         <h3>Personal</h3>
-            <br><output>Clothing = £</output><input id="Clothing" placeholder="Clothing Costs" value="" type="number" min="0">
+            <br><output>Savings = £</output><input id="Savings" placeholder="Savings" value="" type="number" min="0"> 
+            <br><br><br><output>Clothing = £</output><input id="Clothing" placeholder="Clothing Costs" value="" type="number" min="0">
             <br><br><br><output>Phone = £</output><input id="Phone" placeholder="Phone Bill" value="" type="number" min="0">
             <br><br><br><output>Subscriptions = £</output><input id="Subs" placeholder="Subscriptions Costs" value="" type="number" min="0">
             <br><br>
@@ -60,7 +62,7 @@
             <br><output>Groceries = £</output><input id="Groceries" placeholder="Monthly Groceries Cost" value="" type="number" min="0">
             <br><br><br><output>Eating Out = £</output><input id="Eat-Out" placeholder="Eating-out Fund" value="" type="number" min="0">
 
-        <br><br><br><button id="ExpenseSubmit" onclick="TotalExpense()">Submit</button>
+        <br><br><br><button type="button" id="ExpenseSubmit" onclick="TotalExpense()">Submit</button>
         
         
         <!-- Custom Expenses-->
@@ -70,24 +72,40 @@
         <br><br><br><input id="CustomExpense2" style="display: none;" value="0">
         <button id="RemoveCustomExpense2" style="display:none;" onclick="RemoveCustom('CustomExpense2', 'RemoveCustomExpense2')">Remove</button>
         
-        <br><br><br><output id="TotalExpense">
+        <br><br><br><output id="TotalExpense"></output>
     </div>
 
     
 
+    <!-- Savings -->
+    <div id="page4" style="display: none;">
+        <br><output>Amount In Savings = £</output><input id="Saved" placeholder="Amount In Savings" value="" type="number" min="0">
+        <br><br><br><output>Annual Interest Rate = %</output><input id="Interest" placeholder="Interest Rates" value="" type="number" min="0">
+        <br><br><br><output>Years Saving = </output><input id="Years" placeholder="Years Saving For" value="" type="number" min="0">
+        <br><br><br><button id="Compound" onclick="CalcInterest('compound')">Compound</button>
+        <button id="Simple" onclick="CalcInterest('simple')">Simple</button>
+
+        <br><br><br><output id="Result"></output>
+
+    </div>
 
 
 
     <!-- Dashboard -->
-    <div id="page4" style="display: none;">
+    <div id="page5" style="display: none;">
         <h2>Dashboard</h2>
         <h3>Total Income</h3>
-        <output id="TotalIncome"></output>
+        <output>£</output><output id="DashboardIncome">£</output>
+        <h3>Total Expense</h3>
+        <output>£</output><output id="DashboardExpense"></output>
+        <h3>Profit</h3>
+        <output>£</output><output id="Profit">0</output>
+        
 
     </div>
 
     <!-- Main Menu Button -->
-    <br><br><br><br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('page1')">Main Menu</button>
+    <br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('page1')">Main Menu</button>
 
 </body>
 

@@ -1,5 +1,5 @@
 // Function to Go to a different page
-CurrentPageId = 'page1'
+let CurrentPageId = 'page1'
 function websiteGoTo(PageId){
     document.getElementById(CurrentPageId).style.display = "none"
     document.getElementById(PageId).style.display = "inline-block"
@@ -12,7 +12,8 @@ function websiteGoTo(PageId){
 
 
 // Function to Total and output the Incomes
-totalincome=0
+let totalincome=0
+DashboardIncome=0
 function TotalIncome(){
 
     CustomIncome1=parseInt(document.getElementById('CustomIncome1').value)
@@ -20,7 +21,8 @@ function TotalIncome(){
     wage=document.getElementById('wage').value
     Irregular=document.getElementById('IrregularIncome').value
     if(wage == "" || Irregular == ""){
-        document.getElementById('TotalIncome').value='Please Enter Valid Data'
+        document.getElementById('TotalIncome').textContent='Please Enter Valid Data'
+        document.getElementById('DashboardIncome').textContent=0
     }
     
     else{
@@ -28,9 +30,11 @@ function TotalIncome(){
         Irregular=parseInt(Irregular)
 
         totalincome=wage+Irregular+CustomIncome1+CustomIncome2
-        document.getElementById('TotalIncome').value='Total income = ' + totalincome  
+        document.getElementById('TotalIncome').textContent='Total income = ' + totalincome  
+        document.getElementById('DashboardIncome').textContent = totalincome
     }
   
+    return totalincome
 }
 
 
@@ -38,6 +42,8 @@ function TotalIncome(){
 
 
 // Function Calculating total Expenses
+let totalexpense=0
+DashboardExpense=0
 function TotalExpense(){
     CustomExpense1=parseInt(document.getElementById('CustomExpense1').value)
     CustomExpense2=parseInt(document.getElementById('CustomExpense2').value)
@@ -49,13 +55,15 @@ function TotalExpense(){
     clothing=document.getElementById('Clothing').value
     phone=document.getElementById('Phone').value
     subs=document.getElementById('Subs').value
+    savings=document.getElementById('Savings').value
 
     groceries=document.getElementById('Groceries').value
     eatOut=document.getElementById('Eat-Out').value
 
-
-    if(rent == "" || electric == "" || water == "" || gas== "" || clothing == "" || phone == "" || subs == "" || groceries == "" || eatOut == ""){
-        document.getElementById('TotalExpense').value='Please Enter Valid Data'
+    
+    if(rent == "" || electric == "" || water == "" || gas== "" || clothing == "" || phone == "" || subs == "" || savings == "" || groceries == "" || eatOut == ""){
+        document.getElementById('TotalExpense').textContent='Please Enter Valid Data'
+        document.getElementById('DashboardExpense').textContent=0
     }
     
     else{
@@ -67,14 +75,19 @@ function TotalExpense(){
         clothing=parseInt(clothing)
         phone=parseInt(phone)
         subs=parseInt(subs)
+        savings=parseInt(savings)
         
         groceries=parseInt(groceries)
         eatOut=parseInt(eatOut)
 
-        totalexpense=rent+electric+gas+water+clothing+phone+subs+groceries+eatOut+CustomExpense1+CustomExpense2
-        document.getElementById('TotalExpense').value='Total expense = ' + totalexpense  
+        totalexpense=rent+electric+gas+water+clothing+phone+subs+savings+groceries+eatOut+CustomExpense1+CustomExpense2
+        document.getElementById('TotalExpense').textContent='Total expense = ' + totalexpense
+        document.getElementById('DashboardExpense').textContent = totalexpense
+
     }
+
   
+    return totalexpense
 }
 
 
@@ -124,4 +137,43 @@ function RemoveCustom(Custom, Pressed){
     document.getElementById(Custom).value=0
     document.getElementById(Custom).style.display = "none"
     document.getElementById(Pressed).style.display = "none"
+}
+
+// Function To calculate the final profit
+function CalcProfit(){
+    Profit = totalincome - totalexpense
+    document.getElementById('Profit').value = Profit
+}
+
+
+// Function to calculate compound or simple interest interest
+function CalcInterest(type){
+    
+    saved=document.getElementById('Saved').value
+    interest=document.getElementById('Interest').value
+    years=document.getElementById('Years').value
+
+    if(saved=="" || interest=="" || years==""){
+        document.getElementById('Result').value='Please Fill all Fields'
+        return
+    }
+
+    total=0
+    saved=Number(saved)
+    interest=Number(interest)/100
+    years=Number(years)
+
+    if(type=='compound'){
+        total=saved*(1+interest)**years
+    }
+
+    if(type=='simple'){
+        total=saved+(saved*interest*years)
+    }
+
+        total=total.toFixed(2)
+        difference=total-saved
+        difference=difference.toFixed(2)
+
+        document.getElementById('Result').value='Total Savings after '+years+ ' years is £'+total+' (+£'+difference+')'
 }
