@@ -16,11 +16,13 @@ let totalincome=0
 DashboardIncome=0
 function TotalIncome(){
 
-    CustomIncome1=parseInt(document.getElementById('CustomIncome1').value)
-    CustomIncome2=parseInt(document.getElementById('CustomIncome2').value)
+
     wage=document.getElementById('wage').value
     Irregular=document.getElementById('IrregularIncome').value
-    if(wage == "" || Irregular == ""){
+
+    CustomIncome1=document.getElementById('CustomIncome1').value
+    CustomIncome2=document.getElementById('CustomIncome2').value
+    if(wage == "" || Irregular == "" || CustomIncome1 == "" || CustomIncome2 == ""){
         document.getElementById('TotalIncome').textContent='Please Enter Valid Data'
         document.getElementById('DashboardIncome').textContent=0
     }
@@ -28,6 +30,9 @@ function TotalIncome(){
     else{
         wage=parseInt(wage)
         Irregular=parseInt(Irregular)
+
+        CustomIncome1=Number(CustomIncome1)
+        CustomIncome2=Number(CustomIncome2)
 
         totalincome=wage+Irregular+CustomIncome1+CustomIncome2
         document.getElementById('TotalIncome').textContent='Total income = ' + totalincome  
@@ -45,8 +50,7 @@ function TotalIncome(){
 let totalexpense=0
 DashboardExpense=0
 function TotalExpense(){
-    CustomExpense1=parseInt(document.getElementById('CustomExpense1').value)
-    CustomExpense2=parseInt(document.getElementById('CustomExpense2').value)
+
     rent=document.getElementById('Rent').value
     electric=document.getElementById('Electric').value
     water=document.getElementById('Water').value
@@ -60,8 +64,10 @@ function TotalExpense(){
     groceries=document.getElementById('Groceries').value
     eatOut=document.getElementById('Eat-Out').value
 
-    
-    if(rent == "" || electric == "" || water == "" || gas== "" || clothing == "" || phone == "" || subs == "" || savings == "" || groceries == "" || eatOut == ""){
+    CustomExpense1=document.getElementById('CustomExpense1').value
+    CustomExpense2=document.getElementById('CustomExpense2').value    
+
+    if(rent == "" || electric == "" || water == "" || gas== "" || clothing == "" || phone == "" || subs == "" || savings == "" || groceries == "" || eatOut == "" || CustomExpense1 == "" || CustomExpense2 == ""){
         document.getElementById('TotalExpense').textContent='Please Enter Valid Data'
         document.getElementById('DashboardExpense').textContent=0
     }
@@ -80,6 +86,9 @@ function TotalExpense(){
         groceries=parseInt(groceries)
         eatOut=parseInt(eatOut)
 
+        CustomExpense1=Number(CustomExpense1)
+        CustomExpense2=Number(CustomExpense2)
+
         totalexpense=rent+electric+gas+water+clothing+phone+subs+savings+groceries+eatOut+CustomExpense1+CustomExpense2
         document.getElementById('TotalExpense').textContent='Total expense = ' + totalexpense
         document.getElementById('DashboardExpense').textContent = totalexpense
@@ -94,43 +103,52 @@ function TotalExpense(){
 
 
 
-// Function that displays the hidden custom income inputs
-function CustomIncome(){
-    check = document.getElementById('CustomIncome1').style.display
-    if(check == "inline-block"){
-        document.getElementById('CustomIncome2').style.display = "inline-block"
-        document.getElementById('RemoveCustomIncome2').style.display = "inline-block"    
+// Function that displays the hidden custom inputs
+function CustomCategory(type){
+    if(type=='income'){
+        check = document.getElementById('CustomIncome1').style.display
+        if(check == "inline-block"){
+            document.getElementById('CustomIncome2').style.display = "inline-block"
+            if(document.getElementById('CustomIncome2').value == 0){
+                document.getElementById('CustomIncome2').value=""    
+            }
+            document.getElementById('RemoveCustomIncome2').style.display = "inline-block"    
+        }
+
+        else{
+            document.getElementById('CustomIncome1').style.display = "inline-block"
+            if(document.getElementById('CustomIncome1').value == 0){
+                document.getElementById('CustomIncome1').value=""    
+            }
+            document.getElementById('RemoveCustomIncome1').style.display = "inline-block"   
+        }
     }
+
+    if(type=='expense'){
+        check = document.getElementById('CustomExpense1').style.display
+        if(check == "inline-block"){
+            document.getElementById('CustomExpense2').style.display = "inline-block"
+            if(document.getElementById('CustomExpense2').value == 0){
+                document.getElementById('CustomExpense2').value=""    
+            }
+        
+            document.getElementById('RemoveCustomExpense2').style.display = "inline-block"    
+        }
     
-    else{
-        document.getElementById('CustomIncome1').style.display = "inline-block"
-        document.getElementById('RemoveCustomIncome1').style.display = "inline-block"   
+        else{
+            document.getElementById('CustomExpense1').style.display = "inline-block"
+            if(document.getElementById('CustomExpense1').value == 0){
+                document.getElementById('CustomExpense1').value=""    
+            }
+            document.getElementById('RemoveCustomExpense1').style.display = "inline-block"   
     }
 
-
+    }
 
 }
 
 
 
-
-
-// Function that displays the hidden custom expense inputs
-function CustomExpense(){
-    check = document.getElementById('CustomExpense1').style.display
-    if(check == "inline-block"){
-        document.getElementById('CustomExpense2').style.display = "inline-block"
-        document.getElementById('RemoveCustomExpense2').style.display = "inline-block"    
-    }
-    
-    else{
-        document.getElementById('CustomExpense1').style.display = "inline-block"
-        document.getElementById('RemoveCustomExpense1').style.display = "inline-block"   
-    }
-
-
-
-}
 
 // Button to remove custom inputs
 function RemoveCustom(Custom, Pressed){

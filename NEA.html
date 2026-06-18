@@ -8,9 +8,9 @@
     
     <!-- Main Menu -->
     <div id="page1">
-        <button id="IncomePage" onclick="websiteGoTo('page2')">Income</button> <br><br>
-        <button id="ExpensesPage" onclick="websiteGoTo('page3')">Expenses</button> <br><br>
-        <button id="SavingsPage" onclick="websiteGoTo('page4')">Savings</button><br><br>
+        <button id="IncomePage" onclick="websiteGoTo('page2')">Income</button> <br><br><br><br>
+        <button id="ExpensesPage" onclick="websiteGoTo('page3')">Expenses</button> <br><br><br><br>
+        <button id="SavingsPage" onclick="websiteGoTo('page4')">Savings</button><br><br><br><br>
         <button id="DashboardPage" onclick="websiteGoTo('page5'); TotalIncome(); TotalExpense(); CalcProfit()">Dashboard</button>
     </div>
 
@@ -28,10 +28,10 @@
         
         
         <!-- Custom Incomes-->
-        <button id="CustomIncome" onclick="CustomIncome()">Add Custom Item</button>
-        <br><br><br><input id="CustomIncome1" style="display: none;" value="0" type="number" min="0">
+        <button id="CustomIncome" onclick="CustomCategory('income')">Add Custom Item</button>
+        <br><br><br><input id="CustomIncome1" style="display: none;" value="0" type="number" min="0" placeholder="Enter Custom Income">
         <button id="RemoveCustomIncome1" style="display:none;" onclick="RemoveCustom('CustomIncome1', 'RemoveCustomIncome1')">Remove</button>
-        <br><br><br><input id="CustomIncome2" style="display: none" value="0" type="number" min="0">
+        <br><br><br><input id="CustomIncome2" style="display: none" value="0" type="number" min="0" placeholder="Enter Custom Income">
         <button id="RemoveCustomIncome2" style="display:none;" onclick="RemoveCustom('CustomIncome2', 'RemoveCustomIncome2')">Remove</button>
         <br><br><output id="TotalIncome"></output>
     </div>
@@ -66,10 +66,10 @@
         
         
         <!-- Custom Expenses-->
-        <button id="CustomExpense" onclick="CustomExpense()">Add Custom Item</button>
-        <br><br><br><input id="CustomExpense1" style="display: none;" value="0">
+        <button id="CustomExpense" onclick="CustomCategory('expense')">Add Custom Item</button>
+        <br><br><br><input id="CustomExpense1" style="display: none;" value="0" placeholder="Enter Custom Expense">
         <button id="RemoveCustomExpense1" style="display:none;" onclick="RemoveCustom('CustomExpense1', 'RemoveCustomExpense1')">Remove</button>
-        <br><br><br><input id="CustomExpense2" style="display: none;" value="0">
+        <br><br><br><input id="CustomExpense2" style="display: none;" value="0" placeholder="Enter Custom Expense">
         <button id="RemoveCustomExpense2" style="display:none;" onclick="RemoveCustom('CustomExpense2', 'RemoveCustomExpense2')">Remove</button>
         
         <br><br><br><output id="TotalExpense"></output>
