@@ -22,14 +22,18 @@ function TotalIncome(){
 
     CustomIncome1=document.getElementById('CustomIncome1').value
     CustomIncome2=document.getElementById('CustomIncome2').value
+    
+    // Validation, checking if any of the inputs are empty
     if(wage == "" || Irregular == "" || CustomIncome1 == "" || CustomIncome2 == ""){
         document.getElementById('TotalIncome').textContent='Please Enter Valid Data'
-        document.getElementById('DashboardIncome').textContent=0
+        document.getElementById('DashboardIncome').textContent=0+'  (Fields Empty)'
     }
     
+    // Turn all the inputs into numbers so they can be used in the calculation
+    
     else{
-        wage=parseInt(wage)
-        Irregular=parseInt(Irregular)
+        wage=Number(wage)
+        Irregular=Number(Irregular)
 
         CustomIncome1=Number(CustomIncome1)
         CustomIncome2=Number(CustomIncome2)
@@ -67,24 +71,40 @@ function TotalExpense(){
     CustomExpense1=document.getElementById('CustomExpense1').value
     CustomExpense2=document.getElementById('CustomExpense2').value    
 
-    if(rent == "" || electric == "" || water == "" || gas== "" || clothing == "" || phone == "" || subs == "" || savings == "" || groceries == "" || eatOut == "" || CustomExpense1 == "" || CustomExpense2 == ""){
+    // Validation, checking if any of the inputs are empty
+
+    if(rent == "" || 
+    electric == "" || 
+    water == "" || 
+    gas== "" || 
+    clothing == "" || 
+    phone == "" || 
+    subs == "" || 
+    savings == "" || 
+    groceries == "" || 
+    eatOut == "" || 
+    CustomExpense1 == "" ||
+    CustomExpense2 == ""){
+
         document.getElementById('TotalExpense').textContent='Please Enter Valid Data'
-        document.getElementById('DashboardExpense').textContent=0
+        document.getElementById('DashboardExpense').textContent=0+ '    (Fields Empty)'
     }
     
+    // Turn all the inputs into numbers so they can be used in the calculation
+    
     else{
-        rent=parseInt(rent)
-        electric=parseInt(electric)
-        water=parseInt(water)
-        gas=parseInt(gas)
+        rent=Number(rent)
+        electric=Number(electric)
+        water=Number(water)
+        gas=Number(gas)
 
-        clothing=parseInt(clothing)
-        phone=parseInt(phone)
-        subs=parseInt(subs)
-        savings=parseInt(savings)
+        clothing=Number(clothing)
+        phone=Number(phone)
+        subs=Number(subs)
+        savings=Number(savings)
         
-        groceries=parseInt(groceries)
-        eatOut=parseInt(eatOut)
+        groceries=Number(groceries)
+        eatOut=Number(eatOut)
 
         CustomExpense1=Number(CustomExpense1)
         CustomExpense2=Number(CustomExpense2)
@@ -104,6 +124,7 @@ function TotalExpense(){
 
 
 // Function that displays the hidden custom inputs
+// Checks to see if the first category is showing before showing the second, allowing for them to be added individually
 function CustomCategory(type){
     if(type=='income'){
         check = document.getElementById('CustomIncome1').style.display
@@ -124,7 +145,10 @@ function CustomCategory(type){
         }
     }
 
+    // Add custom expenses
     if(type=='expense'){
+        
+        // Validation for checking if the first one is already displayed
         check = document.getElementById('CustomExpense1').style.display
         if(check == "inline-block"){
             document.getElementById('CustomExpense2').style.display = "inline-block"
@@ -132,9 +156,12 @@ function CustomCategory(type){
                 document.getElementById('CustomExpense2').value=""    
             }
         
+            
+            // Display the remove custom expense button
             document.getElementById('RemoveCustomExpense2').style.display = "inline-block"    
         }
     
+        
         else{
             document.getElementById('CustomExpense1').style.display = "inline-block"
             if(document.getElementById('CustomExpense1').value == 0){
@@ -165,33 +192,103 @@ function CalcProfit(){
 
 
 // Function to calculate compound or simple interest interest
-function CalcInterest(type){
-    
-    saved=document.getElementById('Saved').value
-    interest=document.getElementById('Interest').value
-    years=document.getElementById('Years').value
+// Also makes the graph
+let chart
 
+function CalcInterest(type){
+
+    let saved = document.getElementById('Saved').value
+    let interest = document.getElementById('Interest').value
+    let years = document.getElementById('Years').value
+
+    // Validation, checking if any inputs are empty
+    
     if(saved=="" || interest=="" || years==""){
         document.getElementById('Result').value='Please Fill all Fields'
         return
     }
 
-    total=0
-    saved=Number(saved)
-    interest=Number(interest)/100
-    years=Number(years)
+    // Turn the inputs into numbers so they can be used in the calculation
+    // Divide interest by 100 to turn it from a percentage to a decimal
 
-    if(type=='compound'){
-        total=saved*(1+interest)**years
+    let total = 0
+    saved = Number(saved)
+    interest = Number(interest)/100
+    years = Number(years)
+
+    // Making empty strings for the values in the graph
+    const labels = []
+    const values = []
+
+    // For loop Repeat the calculations for the amount of years needed
+    
+    for(let year = 0; year <= years; year++){
+
+        labels.push(year)
+
+        let value
+
+        if(type == 'compound'){
+            value = saved * Math.pow(1 + interest, year)
+        }
+
+        if(type == 'simple'){
+            value = saved + (saved * interest * year)
+        }
+
+        // Push the value of each year to an array for the graph
+        values.push(value.toFixed(2))
     }
 
-    if(type=='simple'){
-        total=saved+(saved*interest*years)
+
+    total = values[values.length - 1]
+
+    // Calculating a difference
+    
+    let difference = (total - saved).toFixed(2)
+
+    
+    // Output for valid data
+    document.getElementById('Result').value =
+        'Total Savings after ' + years +' years is £' + total +' (+£' + difference + ')'
+
+    // Draw chart
+    const ctx = document.getElementById('myChart')
+
+    // Delete existing chart
+    
+    if(chart){
+        chart.destroy()
     }
 
-        total=total.toFixed(2)
-        difference=total-saved
-        difference=difference.toFixed(2)
+    // Everything for the chart
 
-        document.getElementById('Result').value='Total Savings after '+years+ ' years is £'+total+' (+£'+difference+')'
+    chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Savings Value (£)',
+                data: values,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Value (£)'
+                    }
+                }
+            }
+        }
+    })
 }

@@ -8,6 +8,7 @@
     
     <!-- Main Menu -->
     <div id="page1">
+        <br><br><br><br>
         <button id="IncomePage" onclick="websiteGoTo('page2')">Income</button> <br><br><br><br>
         <button id="ExpensesPage" onclick="websiteGoTo('page3')">Expenses</button> <br><br><br><br>
         <button id="SavingsPage" onclick="websiteGoTo('page4')">Savings</button><br><br><br><br>
@@ -21,7 +22,7 @@
     <!-- Income Category -->
     <div id="page2" style="display: none;">
         <h2>Income</h2>
-        <br><output>Wage = £</output><input id="wage" placeholder=" monthly wage" value="" type="number" min="0">
+        <br><output>Wage = £</output><input id="wage" placeholder="Monthly wage" value="" type="number" min="0">
         <br><br><br><output>Irregular Income = £</output><input id="IrregularIncome" placeholder=" Irregular Income" value="" type="number" min="0">
         
         <br><br><br><button id="IncomeSubmit" onclick="TotalIncome()">Submit</button>
@@ -78,16 +79,29 @@
     
 
     <!-- Savings -->
-    <div id="page4" style="display: none;">
-        <br><output>Amount In Savings = £</output><input id="Saved" placeholder="Amount In Savings" value="" type="number" min="0">
-        <br><br><br><output>Annual Interest Rate = %</output><input id="Interest" placeholder="Interest Rates" value="" type="number" min="0">
-        <br><br><br><output>Years Saving = </output><input id="Years" placeholder="Years Saving For" value="" type="number" min="0">
-        <br><br><br><button id="Compound" onclick="CalcInterest('compound')">Compound</button>
-        <button id="Simple" onclick="CalcInterest('simple')">Simple</button>
+<div id="page4" style="display: none;">
+    <br><output>Amount In Savings = £</output>
+    <input id="Saved" placeholder="Amount In Savings" value="" type="number" min="0">
 
-        <br><br><br><output id="Result"></output>
+    <br><br><br><output>Annual Interest Rate = %</output>
+    <input id="Interest" placeholder="Interest Rates" value="" type="number" min="0">
 
+    <br><br><br><output>Years Saving = </output>
+    <input id="Years" placeholder="Years Saving For" value="" type="number" min="0">
+
+    <br><br><br>
+    <button id="Compound" onclick="CalcInterest('compound')">Compound</button>
+    <button id="Simple" onclick="CalcInterest('simple')">Simple</button>
+
+    <br><br><br>
+    <output id="Result"></output>
+
+    <!-- Graph -->
+    <br><br>
+    <div style="width: 700px; max-width: 100%;">
+        <canvas id="myChart"></canvas>
     </div>
+</div>
 
 
 
@@ -100,7 +114,7 @@
         <output>£</output><output id="DashboardExpense"></output>
         <h3>Profit</h3>
         <output>£</output><output id="Profit">0</output>
-        
+
 
     </div>
 
@@ -110,3 +124,4 @@
 </body>
 
 <script src="NEA.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
