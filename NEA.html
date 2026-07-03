@@ -12,7 +12,7 @@
         <button id="IncomePage" onclick="websiteGoTo('page2')">Income</button> <br><br><br><br>
         <button id="ExpensesPage" onclick="websiteGoTo('page3')">Expenses</button> <br><br><br><br>
         <button id="SavingsPage" onclick="websiteGoTo('page4')">Savings</button><br><br><br><br>
-        <button id="DashboardPage" onclick="websiteGoTo('page5'); TotalIncome(); TotalExpense(); CalcProfit()">Dashboard</button>
+        <button id="DashboardPage" onclick="websiteGoTo('page5'); TotalIncome(); TotalExpense(); CalcProfit(); pie()">Dashboard</button>
     </div>
 
 
@@ -22,9 +22,10 @@
     <!-- Income Category -->
     <div id="page2" style="display: none;">
         <h2>Income</h2>
-        <br><output>Wage = £</output><input id="wage" placeholder="Monthly wage" value="" type="number" min="0">
-        <br><br><br><output>Irregular Income = £</output><input id="IrregularIncome" placeholder=" Irregular Income" value="" type="number" min="0">
-        
+        <div id="Income" style="text-align: end;">
+            <br><output>Wage = £</output><input id="wage" placeholder="Monthly wage" value="" type="number" min="0">
+            <br><br><br><output>Irregular Income = £</output><input id="IrregularIncome" placeholder=" Irregular Income" value="" type="number" min="0">
+        </div>
         <br><br><br><button id="IncomeSubmit" onclick="TotalIncome()">Submit</button>
         
         
@@ -44,24 +45,33 @@
     <!-- Expenses Category -->
     <div id="page3" style="display: none;">
         <h2>Expenses</h2>
-        <h3>Housing</h3>
+        
+        <div id="Housing" style="text-align: end;">    
+            <h3 style="text-align: center;">Housing</h3>
             <br><output>Mortgage/Rent = £</output><input id="Rent" placeholder="Monthly rent" value="" type="number" min="0">
             <br><br><br><output>Electric = £</output><input id="Electric" placeholder="Electric Bill" value="" type="number" min="0">
             <br><br><br><output>Water = £</output><input id="Water" placeholder="Water Bill" value="" type="number" min="0">
             <br><br><br><output>Gas = £</output><input id="Gas" placeholder="Gas Bill" value="" type="number" min="0">
-            <br><br>
+
+        </div>
 
 
-        <h3>Personal</h3>
+        
+        <div id="Personal" style="text-align: end;">
+            <h3 style="text-align: center;">Personal</h3>
             <br><output>Savings = £</output><input id="Savings" placeholder="Savings" value="" type="number" min="0"> 
             <br><br><br><output>Clothing = £</output><input id="Clothing" placeholder="Clothing Costs" value="" type="number" min="0">
             <br><br><br><output>Phone = £</output><input id="Phone" placeholder="Phone Bill" value="" type="number" min="0">
             <br><br><br><output>Subscriptions = £</output><input id="Subs" placeholder="Subscriptions Costs" value="" type="number" min="0">
-            <br><br>
-   
-        <h3>Food</h3>
+
+        </div>
+
+        
+        <div id="Food" style="text-align: end;">
+            <h3 style="text-align: center;">Food</h3>
             <br><output>Groceries = £</output><input id="Groceries" placeholder="Monthly Groceries Cost" value="" type="number" min="0">
             <br><br><br><output>Eating Out = £</output><input id="Eat-Out" placeholder="Eating-out Fund" value="" type="number" min="0">
+        </div>
 
         <br><br><br><button type="button" id="ExpenseSubmit" onclick="TotalExpense()">Submit</button>
         
@@ -80,14 +90,16 @@
 
     <!-- Savings -->
 <div id="page4" style="display: none;">
-    <br><output>Amount In Savings = £</output>
-    <input id="Saved" placeholder="Amount In Savings" value="" type="number" min="0">
+    <div style="text-align: end; margin-right: 200px;">
+        <br><output>Amount In Savings = £</output>
+        <input id="Saved" placeholder="Amount In Savings" value="" type="number" min="0">
 
-    <br><br><br><output>Annual Interest Rate = %</output>
-    <input id="Interest" placeholder="Interest Rates" value="" type="number" min="0">
+        <br><br><br><output>Annual Interest Rate = %</output>
+        <input id="Interest" placeholder="Interest Rates" value="" type="number" min="0">
 
-    <br><br><br><output>Years Saving = </output>
-    <input id="Years" placeholder="Years Saving For" value="" type="number" min="0">
+        <br><br><br><output>Years Saving = </output>
+        <input id="Years" placeholder="Years Saving For" value="" type="number" min="0">
+    </div>
 
     <br><br><br>
     <button id="Compound" onclick="CalcInterest('compound')">Compound</button>
@@ -114,6 +126,9 @@
         <output>£</output><output id="DashboardExpense"></output>
         <h3>Profit</h3>
         <output>£</output><output id="Profit">0</output>
+        <div style="width: 500px; max-width: 100%;">
+            <canvas id ="pie-chart"></canvas>
+        </div>
 
 
     </div>

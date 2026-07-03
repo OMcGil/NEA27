@@ -39,8 +39,8 @@ function TotalIncome(){
         CustomIncome2=Number(CustomIncome2)
 
         totalincome=wage+Irregular+CustomIncome1+CustomIncome2
-        document.getElementById('TotalIncome').textContent='Total income = ' + totalincome  
-        document.getElementById('DashboardIncome').textContent = totalincome
+        document.getElementById('TotalIncome').textContent='Total income = £' + totalincome.toFixed(2)
+        document.getElementById('DashboardIncome').textContent = totalincome.toFixed(2)
     }
   
     return totalincome
@@ -93,30 +93,32 @@ function TotalExpense(){
     // Turn all the inputs into numbers so they can be used in the calculation
     
     else{
-        rent=Number(rent)
-        electric=Number(electric)
-        water=Number(water)
-        gas=Number(gas)
+    pievalues=[
+        rent=Number(rent),
+        electric=Number(electric),
+        water=Number(water),
+        gas=Number(gas),
 
-        clothing=Number(clothing)
-        phone=Number(phone)
-        subs=Number(subs)
-        savings=Number(savings)
+        clothing=Number(clothing),
+        phone=Number(phone),
+        subs=Number(subs),
+        savings=Number(savings),
         
-        groceries=Number(groceries)
-        eatOut=Number(eatOut)
+        groceries=Number(groceries),
+        eatOut=Number(eatOut),
 
-        CustomExpense1=Number(CustomExpense1)
+        CustomExpense1=Number(CustomExpense1),
         CustomExpense2=Number(CustomExpense2)
+    ]
 
         totalexpense=rent+electric+gas+water+clothing+phone+subs+savings+groceries+eatOut+CustomExpense1+CustomExpense2
-        document.getElementById('TotalExpense').textContent='Total expense = ' + totalexpense
-        document.getElementById('DashboardExpense').textContent = totalexpense
+        document.getElementById('TotalExpense').textContent='Total expense = £' + totalexpense.toFixed(2)
+        document.getElementById('DashboardExpense').textContent = totalexpense.toFixed(2)
 
     }
 
   
-    return totalexpense
+    return totalexpense, pievalues
 }
 
 
@@ -187,7 +189,7 @@ function RemoveCustom(Custom, Pressed){
 // Function To calculate the final profit
 function CalcProfit(){
     Profit = totalincome - totalexpense
-    document.getElementById('Profit').value = Profit
+    document.getElementById('Profit').value = Profit.toFixed(2)
 }
 
 
@@ -252,18 +254,18 @@ function CalcInterest(type){
     document.getElementById('Result').value =
         'Total Savings after ' + years +' years is £' + total +' (+£' + difference + ')'
 
-    // Draw chart
-    const ctx = document.getElementById('myChart')
+
 
     // Delete existing chart
     
     if(chart){
         chart.destroy()
     }
-
     // Everything for the chart
 
-    chart = new Chart(ctx, {
+    // Draw chart
+    const LineChartId = document.getElementById('myChart')
+    chart = new Chart(LineChartId, {
         type: 'line',
         data: {
             labels: labels,
@@ -291,4 +293,39 @@ function CalcInterest(type){
             }
         }
     })
+}
+
+function pie(){
+    if(chart){
+    chart.destroy()
+    }
+    const PieChartId=document.getElementById('pie-chart')
+    chart = new Chart(PieChartId, {
+    type: 'pie',
+    data: {
+        labels: ['Rent', 'Electric', 'Water', 'Gas','Clothing','Phone','Subscription','Savings','Groceries','Eating Out','Custom Expense 1','Custom Expense 2'],
+        datasets: [{
+            data: pievalues,
+            backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgb(122, 57, 245)',
+            'rgb(0, 0, 0)',
+            'rgb(253, 122, 0)',
+            'rgb(104, 0, 22)',
+            'rgb(255, 0, 0)',
+            'rgb(102, 255, 0)',
+            'rgb(255, 255, 255)',
+            'rgb(0, 255, 213)',
+            'rgb(225, 250, 0)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        responsive: true,
+
+    }
+})
 }
