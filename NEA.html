@@ -4,15 +4,39 @@
 <body>
     <h1>Budgeting</h1>
     
-    
-    
-    <!-- Main Menu -->
-    <div id="page1">
+    <!-- Login page -->
+    <div id="Login">
+        <h2>Login</h2>
         <br><br><br><br>
-        <button id="IncomePage" onclick="websiteGoTo('page2')">Income</button> <br><br><br><br>
-        <button id="ExpensesPage" onclick="websiteGoTo('page3')">Expenses</button> <br><br><br><br>
-        <button id="SavingsPage" onclick="websiteGoTo('page4')">Savings</button><br><br><br><br>
-        <button id="DashboardPage" onclick="websiteGoTo('page5'); TotalIncome(); TotalExpense(); CalcProfit(); pie()">Dashboard</button>
+        <input id="Username" placeholder="Username" value="" type="text"><br><br><br><br>
+        <input id="Password" placeholder="Password" value="" type="password">
+        <br><br><br><br>
+        <button id="LoginButton" onclick="LoginUser()">Login</button><br><br><br>
+        <button id="RegisterButton" onclick="websiteGoTo('Register')">Create Account</button>
+        <br><br><br>
+        <output id="LoginError"></output>
+    </div>
+
+
+    <!-- Register page-->
+    <div id="Register" style="display: none;">
+        <h2>Register</h2>
+        <br><br><br><br>
+        <input id="NewUsername" placeholder="Username" value="" type="text"><br><br><br><br>
+        <input id="NewPassword" placeholder="Password" value="" type="password">
+        <br><br><br><br>
+        <button id="RegisterButton" onclick="RegisterUser()">Register</button>
+        <br><br><br>
+        <output id="RegisterError"></output>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="MainMenu" style="display: none;">
+        <br><br><br><br>
+        <button id="IncomeButton" onclick="websiteGoTo('IncomePage')">Income</button> <br><br><br><br>
+        <button id="ExpensesButton" onclick="websiteGoTo('ExpensesPage')">Expenses</button> <br><br><br><br>
+        <button id="SavingsButton" onclick="websiteGoTo('SavingsPage')">Savings</button><br><br><br><br>
+        <button id="DashboardButton" onclick="websiteGoTo('DashboardPage'); TotalIncome(); TotalExpense(); CalcProfit(); pie()">Dashboard</button>
     </div>
 
 
@@ -20,7 +44,7 @@
 
 
     <!-- Income Category -->
-    <div id="page2" style="display: none;">
+    <div id="IncomePage" style="display: none;">
         <h2>Income</h2>
         <div id="Income" style="text-align: end;">
             <br><output>Wage = £</output><input id="wage" placeholder="Monthly wage" value="" type="number" min="0">
@@ -43,7 +67,7 @@
 
 
     <!-- Expenses Category -->
-    <div id="page3" style="display: none;">
+    <div id="ExpensesPage" style="display: none;">
         <h2>Expenses</h2>
         
         <div id="Housing" style="text-align: end;">    
@@ -89,7 +113,7 @@
     
 
     <!-- Savings -->
-<div id="page4" style="display: none;">
+<div id="SavingsPage" style="display: none;">
     <div style="text-align: end; margin-right: 200px;">
         <br><output>Amount In Savings = £</output>
         <input id="Saved" placeholder="Amount In Savings" value="" type="number" min="0">
@@ -118,7 +142,7 @@
 
 
     <!-- Dashboard -->
-    <div id="page5" style="display: none;">
+    <div id="DashboardPage" style="display: none;">
         <h2>Dashboard</h2>
         <h3>Total Income</h3>
         <output>£</output><output id="DashboardIncome">£</output>
@@ -133,9 +157,14 @@
 
     </div>
 
-    <!-- Main Menu Button -->
-    <br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('page1')">Main Menu</button>
 
+    <!-- Main Menu Button -->
+    <br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('MainMenu'); MenuButton()" style="display: none;">Main Menu</button>
+
+    <!-- Logout Button -->
+    <br><br><button id="Logout" onclick="websiteGoTo('Login'); LogoutButton()" style="display: none;">Logout</button>
+
+    
 </body>
 
 <script src="NEA.js"></script>

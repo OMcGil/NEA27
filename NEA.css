@@ -2,7 +2,10 @@
 body{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
-    background-color: antiquewhite;
+    background-color: #8AB8D6;
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 9px, #febe10 9px, #febe10 10px);
+
+
 }
 
 
@@ -17,22 +20,22 @@ h1{
     scale: 1.5;
 }
 
-#IncomePage{
+#IncomeButton{
     font-size: xx-large;
     width: 180px;
     height: 50px;
 }
-#ExpensesPage{
+#ExpensesButton{
     font-size: xx-large;
     width: 180px;
     height: 50px;
 }
-#SavingsPage{
+#SavingsButton{
     font-size: xx-large;
     width: 180px;
     height: 50px;
 }
-#DashboardPage{
+#DashboardButton{
     font-size: xx-large;
     width: 180px;
     height: 50px;
@@ -80,3 +83,12 @@ button{
     margin-left: 0;
 }
 
+/*input {
+    padding: 6px;
+    background: #eee;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    margin-bottom: 10px;
+}

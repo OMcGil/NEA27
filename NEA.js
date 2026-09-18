@@ -1,14 +1,92 @@
+// const sqlite3 = require('sqlite3').verbose();
+// let sql;
+
+// const db = new sqlite3.Database('./NEA.db',sqlite3.OPEN_READWRITE, (err) =>{
+//     if (err) return console.error(err.message);
+// })
+
+let Users = []
+let Passwords = []
+
+// Function that passes the users inputs into the users and passwords arrays.
+function RegisterUser(){
+    let username = document.getElementById('NewUsername').value
+    let password = document.getElementById('NewPassword').value
+
+// Validation to check the user has entered a Username and Password
+    if(username == "" || password == ""){
+        document.getElementById('RegisterError').textContent='Please Fill both Fields'
+        return
+    }
+
+// Checks if the entered username already exists
+    if(Users.includes(username)){
+        document.getElementById('RegisterError').textContent='Username Already Exists'
+        return
+    }
+
+    else{
+        Users.push(username)
+        Passwords.push(password)
+        document.getElementById('RegisterError').textContent='Account Created'
+        alert('Account Created')
+    
+        websiteGoTo('Login')
+    }
+}
+
+// Checks the users and passwords arrays for the enterd details, and if found they go through to the main menu
+function LoginUser(){
+    for(let i = 0; i < Users.length; i++){
+        if(document.getElementById('Username').value == Users[i] && document.getElementById('Password').value == Passwords[i]){
+            websiteGoTo('MainMenu')
+            return
+        }
+    }
+    
+// If the Details arent in the array, this error message is displayed
+    document.getElementById('LoginError').textContent='Invalid Username or Password'
+    
+
+}
+
 // Function to Go to a different page
-let CurrentPageId = 'page1'
-function websiteGoTo(PageId){
+let CurrentPageId = 'Login'
+function websiteGoTo(NextPageId){
     document.getElementById(CurrentPageId).style.display = "none"
-    document.getElementById(PageId).style.display = "inline-block"
-    CurrentPageId = PageId
+    document.getElementById(NextPageId).style.display = "inline-block"
+    
+    // Shows the menu button on all pages except the login, register and main page.
+    if (NextPageId != 'MainMenu' && NextPageId != 'Login' && NextPageId != 'Register'){
+        document.getElementById('Menu').style.display = "inline-block"
+    }
+    // Displays the logout button on the main page, and hides it on all other pages.
+    if (NextPageId == 'MainMenu'){
+        document.getElementById('Logout').style.display = "inline-block"
+    }
+    if (NextPageId != 'MainMenu'){
+        document.getElementById('Logout').style.display = "none"
+    }
+
+    CurrentPageId = NextPageId
     
 }
 
 
 
+// When the menu button is pressed, it hides itself and shows the logout button, which should only be displayed on the main page.
+function MenuButton(){
+    document.getElementById('Menu').style.display = "none"
+    document.getElementById('Logout').style.display = "inline-block"
+}
+
+// Logout button, which hides itself and the menu button, and empties and username and password inputs.
+function LogoutButton(){
+    document.getElementById('Logout').style.display = "none"
+    document.getElementById('Menu').style.display = "none"
+    document.getElementById('Username').value = ""
+    document.getElementById('Password').value = ""
+}
 
 
 // Function to Total and output the Incomes
@@ -295,6 +373,7 @@ function CalcInterest(type){
     })
 }
 
+// Function to draw the pie chart for expenses
 function pie(){
     if(chart){
     chart.destroy()
