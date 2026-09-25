@@ -1,7 +1,8 @@
 <title>NEA</title>
 <link rel="stylesheet" href="NEA.css">
-
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body>
+    <div id="box">
     <h1>Budgeting</h1>
     
     <!-- Login page -->
@@ -47,8 +48,10 @@
     <div id="IncomePage" style="display: none;">
         <h2>Income</h2>
         <div id="Income" style="text-align: end;">
-            <br><output>Wage = £</output><input id="wage" placeholder="Monthly wage" value="" type="number" min="0">
-            <br><br><br><output>Irregular Income = £</output><input id="IrregularIncome" placeholder=" Irregular Income" value="" type="number" min="0">
+            <br><output>Wage = £</output><input id="wage" placeholder="Monthly wage" value="" type="number" min="0"> 
+            <button class="info" id="WageInfo" onclick="information('This is your monthly wage, made from a Job')">o</button>
+            <br><br><output>Irregular Income = £</output><input id="IrregularIncome" placeholder=" Irregular Income" value="" type="number" min="0">
+            <button class="info" id="IrregularIncomeInfo" onclick="information('This is your Irregular Income, made from things like gifts, or one off payments')">o</button>
         </div>
         <br><br><br><button id="IncomeSubmit" onclick="TotalIncome()">Submit</button>
         
@@ -73,9 +76,13 @@
         <div id="Housing" style="text-align: end;">    
             <h3 style="text-align: center;">Housing</h3>
             <br><output>Mortgage/Rent = £</output><input id="Rent" placeholder="Monthly rent" value="" type="number" min="0">
+                <button class="info" id="RentInfo" onclick="information('This is your monthly payments for rent or a mortgage, if you have one.')">o</button>
             <br><br><br><output>Electric = £</output><input id="Electric" placeholder="Electric Bill" value="" type="number" min="0">
+                <button class="info" id="ElectricInfo" onclick="information('This is your monthly payments for your electricity bill')">o</button>
             <br><br><br><output>Water = £</output><input id="Water" placeholder="Water Bill" value="" type="number" min="0">
+                <button class="info" id="WaterInfo" onclick="information('This is your monthly payments for your water bill')">o</button>
             <br><br><br><output>Gas = £</output><input id="Gas" placeholder="Gas Bill" value="" type="number" min="0">
+                <button class="info" id="GasInfo" onclick="information('This is your monthly payments for your gas bill')">o</button>
 
         </div>
 
@@ -84,9 +91,13 @@
         <div id="Personal" style="text-align: end;">
             <h3 style="text-align: center;">Personal</h3>
             <br><output>Savings = £</output><input id="Savings" placeholder="Savings" value="" type="number" min="0"> 
+                <button class="info" id="SavingsInfo" onclick="information('This is your monthly savings, the amount you set aside for future use.')">o</button>
             <br><br><br><output>Clothing = £</output><input id="Clothing" placeholder="Clothing Costs" value="" type="number" min="0">
+                <button class="info" id="ClothingInfo" onclick="information('This is your monthly clothing costs, the amount you spend on clothes and accessories.')">o</button>
             <br><br><br><output>Phone = £</output><input id="Phone" placeholder="Phone Bill" value="" type="number" min="0">
+                <button class="info" id="PhoneInfo" onclick="information('This is your monthly phone bill, the amount you pay for your mobile phone service.')">o</button>
             <br><br><br><output>Subscriptions = £</output><input id="Subs" placeholder="Subscriptions Costs" value="" type="number" min="0">
+                <button class="info" id="SubscriptionsInfo" onclick="information('This is your monthly subscription costs, the amount you pay for services like streaming or software.')">o</button>
 
         </div>
 
@@ -94,7 +105,9 @@
         <div id="Food" style="text-align: end;">
             <h3 style="text-align: center;">Food</h3>
             <br><output>Groceries = £</output><input id="Groceries" placeholder="Monthly Groceries Cost" value="" type="number" min="0">
+            <button class="info" id="GroceriesInfo" onclick="information('This is your monthly groceries cost, the amount you spend on food and household supplies.')">o</button>
             <br><br><br><output>Eating Out = £</output><input id="Eat-Out" placeholder="Eating-out Fund" value="" type="number" min="0">
+            <button class="info" id="EatingOutInfo" onclick="information('This is your monthly eating-out fund, the amount you spend on dining at restaurants or ordering takeout.')">o</button>
         </div>
 
         <br><br><br><button type="button" id="ExpenseSubmit" onclick="TotalExpense()">Submit</button>
@@ -157,14 +170,13 @@
 
     </div>
 
-
     <!-- Main Menu Button -->
-    <br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('MainMenu'); MenuButton()" style="display: none;">Main Menu</button>
+    <br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('MainMenu'); MenuButton()" style="display: inline-block;">Main Menu</button>
 
     <!-- Logout Button -->
     <br><br><button id="Logout" onclick="websiteGoTo('Login'); LogoutButton()" style="display: none;">Logout</button>
 
-    
+    </div>
 </body>
 
 <script src="NEA.js"></script>

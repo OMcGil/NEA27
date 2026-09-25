@@ -408,3 +408,8 @@ function pie(){
     }
 })
 }
+
+
+function information(message) {
+   alert(message); 
+}
