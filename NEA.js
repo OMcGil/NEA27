@@ -1,10 +1,3 @@
-// const sqlite3 = require('sqlite3').verbose();
-// let sql;
-
-// const db = new sqlite3.Database('./NEA.db',sqlite3.OPEN_READWRITE, (err) =>{
-//     if (err) return console.error(err.message);
-// })
-
 let Users = []
 let Passwords = []
 
@@ -36,7 +29,10 @@ function RegisterUser(){
 }
 
 // Checks the users and passwords arrays for the enterd details, and if found they go through to the main menu
+let presses=0
 function LoginUser(){
+    presses += 1
+
     for(let i = 0; i < Users.length; i++){
         if(document.getElementById('Username').value == Users[i] && document.getElementById('Password').value == Passwords[i]){
             websiteGoTo('MainMenu')
@@ -169,7 +165,7 @@ function TotalExpense(){
     }
     
     // Turn all the inputs into numbers so they can be used in the calculation
-    
+    // Also puts the inputs into the pievalues array so they can be used to make the pie chart later
     else{
     pievalues=[
         rent=Number(rent),
@@ -213,6 +209,8 @@ function CustomCategory(type){
             if(document.getElementById('CustomIncome2').value == 0){
                 document.getElementById('CustomIncome2').value=""    
             }
+
+            // Display the remove custom expense button
             document.getElementById('RemoveCustomIncome2').style.display = "inline-block"    
         }
 
@@ -339,6 +337,7 @@ function CalcInterest(type){
     if(chart){
         chart.destroy()
     }
+
     // Everything for the chart
 
     // Draw chart
@@ -347,26 +346,41 @@ function CalcInterest(type){
         type: 'line',
         data: {
             labels: labels,
+            color: 'black',
             datasets: [{
                 label: 'Savings Value (£)',
+                fontColor: 'black',
+                backgroundColor: 'rgb(1, 167, 250)',
+                borderColor: 'rgb(0, 0, 0)',
                 data: values,
-                tension: 0.3
+                tension: 0.3,
+                color: 'black',
             }]
         },
         options: {
             responsive: true,
             scales: {
                 x: {
+                    grid: {
+                        color: 'black',
+                    },
                     title: {
                         display: true,
-                        text: 'Year'
-                    }
+                        text: 'Year',
+                        color: 'black',
+                    },
+                    ticks: { color: 'black', beginAtZero: true},
                 },
                 y: {
+                    grid: {
+                        color: 'black'
+                    },
                     title: {
                         display: true,
-                        text: 'Value (£)'
-                    }
+                        text: 'Value (£)',
+                        color: 'black',
+                    },
+                    ticks: { color: 'black', beginAtZero: true},
                 }
             }
         }
@@ -385,6 +399,7 @@ function pie(){
         labels: ['Rent', 'Electric', 'Water', 'Gas','Clothing','Phone','Subscription','Savings','Groceries','Eating Out','Custom Expense 1','Custom Expense 2'],
         datasets: [{
             data: pievalues,
+            // Colours all the different sections of the pie chart
             backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',
@@ -404,12 +419,46 @@ function pie(){
     },
     options: {
         responsive: true,
-
+        plugins: {
+            legend: {
+                display: true,
+                labels: {
+                    color: 'black'
+                }
+            }
+        }
     }
 })
 }
 
-
+// Function that displays the message given when the button is pressed
 function information(message) {
    alert(message); 
 }
+
+// Doesnt work
+function uservalues(username){
+    values=[pievalues, totalincome, totalexpense]
+}
+
+let exparray = []
+function addtoarray(id){
+    exparray.push(document.getElementById(id))
+}
+
+
+// Prevents the user entering negative numbers, and stops the website crashing from too many points on the interest graph
+function minmax(id){
+    if(id == "Years"){
+        if(document.getElementById("Years").value > 5000){
+            document.getElementById("Years").value = 5000
+        }
+
+    }
+
+    if(document.getElementById(id).value < 0){
+        document.getElementById(id).value = 0
+    }
+
+}
+

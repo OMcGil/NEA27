@@ -1,183 +1,226 @@
-<title>NEA</title>
-<link rel="stylesheet" href="NEA.css">
-<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEA</title>
+    <link rel="stylesheet" href="NEA.css">
+</head>
+
 <body>
+
     <div id="box">
-    <h1>Budgeting</h1>
-    
-    <!-- Login page -->
-    <div id="Login">
-        <h2>Login</h2>
-        <br><br><br><br>
-        <input id="Username" placeholder="Username" value="" type="text"><br><br><br><br>
-        <input id="Password" placeholder="Password" value="" type="password">
-        <br><br><br><br>
-        <button id="LoginButton" onclick="LoginUser()">Login</button><br><br><br>
-        <button id="RegisterButton" onclick="websiteGoTo('Register')">Create Account</button>
-        <br><br><br>
-        <output id="LoginError"></output>
-    </div>
+        <h1>Budgeting</h1>
 
-
-    <!-- Register page-->
-    <div id="Register" style="display: none;">
-        <h2>Register</h2>
-        <br><br><br><br>
-        <input id="NewUsername" placeholder="Username" value="" type="text"><br><br><br><br>
-        <input id="NewPassword" placeholder="Password" value="" type="password">
-        <br><br><br><br>
-        <button id="RegisterButton" onclick="RegisterUser()">Register</button>
-        <br><br><br>
-        <output id="RegisterError"></output>
-    </div>
-
-    <!-- Main Menu -->
-    <div id="MainMenu" style="display: none;">
-        <br><br><br><br>
-        <button id="IncomeButton" onclick="websiteGoTo('IncomePage')">Income</button> <br><br><br><br>
-        <button id="ExpensesButton" onclick="websiteGoTo('ExpensesPage')">Expenses</button> <br><br><br><br>
-        <button id="SavingsButton" onclick="websiteGoTo('SavingsPage')">Savings</button><br><br><br><br>
-        <button id="DashboardButton" onclick="websiteGoTo('DashboardPage'); TotalIncome(); TotalExpense(); CalcProfit(); pie()">Dashboard</button>
-    </div>
-
-
-
-
-
-    <!-- Income Category -->
-    <div id="IncomePage" style="display: none;">
-        <h2>Income</h2>
-        <div id="Income" style="text-align: end;">
-            <br><output>Wage = £</output><input id="wage" placeholder="Monthly wage" value="" type="number" min="0"> 
-            <button class="info" id="WageInfo" onclick="information('This is your monthly wage, made from a Job')">o</button>
-            <br><br><output>Irregular Income = £</output><input id="IrregularIncome" placeholder=" Irregular Income" value="" type="number" min="0">
-            <button class="info" id="IrregularIncomeInfo" onclick="information('This is your Irregular Income, made from things like gifts, or one off payments')">o</button>
-        </div>
-        <br><br><br><button id="IncomeSubmit" onclick="TotalIncome()">Submit</button>
-        
-        
-        <!-- Custom Incomes-->
-        <button id="CustomIncome" onclick="CustomCategory('income')">Add Custom Item</button>
-        <br><br><br><input id="CustomIncome1" style="display: none;" value="0" type="number" min="0" placeholder="Enter Custom Income">
-        <button id="RemoveCustomIncome1" style="display:none;" onclick="RemoveCustom('CustomIncome1', 'RemoveCustomIncome1')">Remove</button>
-        <br><br><br><input id="CustomIncome2" style="display: none" value="0" type="number" min="0" placeholder="Enter Custom Income">
-        <button id="RemoveCustomIncome2" style="display:none;" onclick="RemoveCustom('CustomIncome2', 'RemoveCustomIncome2')">Remove</button>
-        <br><br><output id="TotalIncome"></output>
-    </div>
-
-
-
-
-
-    <!-- Expenses Category -->
-    <div id="ExpensesPage" style="display: none;">
-        <h2>Expenses</h2>
-        
-        <div id="Housing" style="text-align: end;">    
-            <h3 style="text-align: center;">Housing</h3>
-            <br><output>Mortgage/Rent = £</output><input id="Rent" placeholder="Monthly rent" value="" type="number" min="0">
-                <button class="info" id="RentInfo" onclick="information('This is your monthly payments for rent or a mortgage, if you have one.')">o</button>
-            <br><br><br><output>Electric = £</output><input id="Electric" placeholder="Electric Bill" value="" type="number" min="0">
-                <button class="info" id="ElectricInfo" onclick="information('This is your monthly payments for your electricity bill')">o</button>
-            <br><br><br><output>Water = £</output><input id="Water" placeholder="Water Bill" value="" type="number" min="0">
-                <button class="info" id="WaterInfo" onclick="information('This is your monthly payments for your water bill')">o</button>
-            <br><br><br><output>Gas = £</output><input id="Gas" placeholder="Gas Bill" value="" type="number" min="0">
-                <button class="info" id="GasInfo" onclick="information('This is your monthly payments for your gas bill')">o</button>
-
+        <!-- Login page -->
+        <div id="Login">
+            <h2>Login</h2>
+            <br><br><br><br>
+            <input id="Username" placeholder="Username" value="" type="text"><br><br><br><br>
+            <input id="Password" placeholder="Password" value="" type="password">
+            <br><br><br><br>
+            <button id="LoginButton" onclick="LoginUser()">Login</button><br><br><br>
+            <button id="RegisterButton" onclick="websiteGoTo('Register')">Create Account</button>
+            <br><br><br>
+            <output id="LoginError"></output>
         </div>
 
 
-        
-        <div id="Personal" style="text-align: end;">
-            <h3 style="text-align: center;">Personal</h3>
-            <br><output>Savings = £</output><input id="Savings" placeholder="Savings" value="" type="number" min="0"> 
-                <button class="info" id="SavingsInfo" onclick="information('This is your monthly savings, the amount you set aside for future use.')">o</button>
-            <br><br><br><output>Clothing = £</output><input id="Clothing" placeholder="Clothing Costs" value="" type="number" min="0">
-                <button class="info" id="ClothingInfo" onclick="information('This is your monthly clothing costs, the amount you spend on clothes and accessories.')">o</button>
-            <br><br><br><output>Phone = £</output><input id="Phone" placeholder="Phone Bill" value="" type="number" min="0">
-                <button class="info" id="PhoneInfo" onclick="information('This is your monthly phone bill, the amount you pay for your mobile phone service.')">o</button>
-            <br><br><br><output>Subscriptions = £</output><input id="Subs" placeholder="Subscriptions Costs" value="" type="number" min="0">
-                <button class="info" id="SubscriptionsInfo" onclick="information('This is your monthly subscription costs, the amount you pay for services like streaming or software.')">o</button>
-
+        <!-- Register page-->
+        <div id="Register" style="display: none;">
+            <h2>Register</h2>
+            <br><br><br><br>
+            <input id="NewUsername" placeholder="Username" value="" type="text"><br><br><br><br>
+            <input id="NewPassword" placeholder="Password" value="" type="password">
+            <br><br><br><br>
+            <button id="RegisterButton" onclick="RegisterUser()">Register</button>
+            <br><br><br>
+            <output id="RegisterError"></output>
         </div>
 
-        
-        <div id="Food" style="text-align: end;">
-            <h3 style="text-align: center;">Food</h3>
-            <br><output>Groceries = £</output><input id="Groceries" placeholder="Monthly Groceries Cost" value="" type="number" min="0">
-            <button class="info" id="GroceriesInfo" onclick="information('This is your monthly groceries cost, the amount you spend on food and household supplies.')">o</button>
-            <br><br><br><output>Eating Out = £</output><input id="Eat-Out" placeholder="Eating-out Fund" value="" type="number" min="0">
-            <button class="info" id="EatingOutInfo" onclick="information('This is your monthly eating-out fund, the amount you spend on dining at restaurants or ordering takeout.')">o</button>
-        </div>
-
-        <br><br><br><button type="button" id="ExpenseSubmit" onclick="TotalExpense()">Submit</button>
-        
-        
-        <!-- Custom Expenses-->
-        <button id="CustomExpense" onclick="CustomCategory('expense')">Add Custom Item</button>
-        <br><br><br><input id="CustomExpense1" style="display: none;" value="0" placeholder="Enter Custom Expense">
-        <button id="RemoveCustomExpense1" style="display:none;" onclick="RemoveCustom('CustomExpense1', 'RemoveCustomExpense1')">Remove</button>
-        <br><br><br><input id="CustomExpense2" style="display: none;" value="0" placeholder="Enter Custom Expense">
-        <button id="RemoveCustomExpense2" style="display:none;" onclick="RemoveCustom('CustomExpense2', 'RemoveCustomExpense2')">Remove</button>
-        
-        <br><br><br><output id="TotalExpense"></output>
-    </div>
-
-    
-
-    <!-- Savings -->
-<div id="SavingsPage" style="display: none;">
-    <div style="text-align: end; margin-right: 200px;">
-        <br><output>Amount In Savings = £</output>
-        <input id="Saved" placeholder="Amount In Savings" value="" type="number" min="0">
-
-        <br><br><br><output>Annual Interest Rate = %</output>
-        <input id="Interest" placeholder="Interest Rates" value="" type="number" min="0">
-
-        <br><br><br><output>Years Saving = </output>
-        <input id="Years" placeholder="Years Saving For" value="" type="number" min="0">
-    </div>
-
-    <br><br><br>
-    <button id="Compound" onclick="CalcInterest('compound')">Compound</button>
-    <button id="Simple" onclick="CalcInterest('simple')">Simple</button>
-
-    <br><br><br>
-    <output id="Result"></output>
-
-    <!-- Graph -->
-    <br><br>
-    <div style="width: 700px; max-width: 100%;">
-        <canvas id="myChart"></canvas>
-    </div>
-</div>
-
-
-
-    <!-- Dashboard -->
-    <div id="DashboardPage" style="display: none;">
-        <h2>Dashboard</h2>
-        <h3>Total Income</h3>
-        <output>£</output><output id="DashboardIncome">£</output>
-        <h3>Total Expense</h3>
-        <output>£</output><output id="DashboardExpense"></output>
-        <h3>Profit</h3>
-        <output>£</output><output id="Profit">0</output>
-        <div style="width: 500px; max-width: 100%;">
-            <canvas id ="pie-chart"></canvas>
+        <!-- Main Menu -->
+        <div id="MainMenu" style="display: none;">
+            <br><br><br><br>
+            <button id="IncomeButton" onclick="websiteGoTo('IncomePage')">Income</button> <br><br><br><br>
+            <button id="ExpensesButton" onclick="websiteGoTo('ExpensesPage')">Expenses</button> <br><br><br><br>
+            <button id="SavingsButton" onclick="websiteGoTo('SavingsPage')">Savings</button><br><br><br><br>
+            <button id="DashboardButton"
+                onclick="websiteGoTo('DashboardPage'); TotalIncome(); TotalExpense(); CalcProfit(); pie()">Dashboard</button>
         </div>
 
 
-    </div>
 
-    <!-- Main Menu Button -->
-    <br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('MainMenu'); MenuButton()" style="display: inline-block;">Main Menu</button>
 
-    <!-- Logout Button -->
-    <br><br><button id="Logout" onclick="websiteGoTo('Login'); LogoutButton()" style="display: none;">Logout</button>
+
+        <!-- Income Category -->
+        <div id="IncomePage" style="display: none;">
+            <h2>Income</h2>
+            <div id="Income" style="text-align: end;">
+                <br><output>Wage = £</output><input id="wage" placeholder="Monthly wage" value="" type="number" min="0" onchange="minmax('wage')">
+                <button class="info" id="WageInfo"
+                    onclick="information('This is your monthly wage, made from a Job')">ℹ️</button>
+                <br><br><output>Irregular Income = £</output><input id="IrregularIncome" placeholder=" Irregular Income" value="" type="number" min="0" onchange="minmax('IrregularIncome')">
+                <button class="info" id="IrregularIncomeInfo"
+                    onclick="information('This is your Irregular Income, made from things like gifts, or one off payments')">ℹ️</button>
+            </div>
+            <br><br><br><button id="IncomeSubmit" onclick="TotalIncome()">Submit</button>
+
+
+            <!-- Custom Incomes-->
+            <button id="CustomIncome" onclick="CustomCategory('income')">Add Custom Item</button>
+            <br><br><br><input id="CustomIncome1" style="display: none;" value="0" type="number" min="0" 
+                placeholder="Enter Custom Income" onchange="minmax('CustomIncome1')">
+            <button id="RemoveCustomIncome1" style="display:none;"
+                onclick="RemoveCustom('CustomIncome1', 'RemoveCustomIncome1')">Remove</button>
+            <br><br><br><input id="CustomIncome2" style="display: none" value="0" type="number" min="0"
+                placeholder="Enter Custom Income" onchange="minmax('CustomIncome2')">
+            <button id="RemoveCustomIncome2" style="display:none;"
+                onclick="RemoveCustom('CustomIncome2', 'RemoveCustomIncome2')">Remove</button>
+            <br><br><output id="TotalIncome"></output>
+        </div>
+
+
+
+
+
+        <!-- Expenses Category -->
+        <div id="ExpensesPage" style="display: none;">
+            <h2>Expenses</h2>
+
+
+            <div id="Housing" style="text-align: end;">
+                <h3 style="text-align: center;">Housing</h3>
+                <br><output>Mortgage/Rent = £</output><input id="Rent" placeholder="Monthly rent" value="" type="number"
+                    min="0" onchange="minmax('Rent')">
+                <button class="info" id="RentInfo"
+                    onclick="information('This is your monthly payments for rent or a mortgage, if you have one.')">ℹ️</button>
+                <br><br><br><output>Electric = £</output><input id="Electric" placeholder="Electric Bill" value=""
+                    type="number" min="0" onchange="minmax('Electric')">
+                <button class="info" id="ElectricInfo"
+                    onclick="information('This is your monthly payments for your electricity bill')">ℹ️</button>
+                <br><br><br><output>Water = £</output><input id="Water" placeholder="Water Bill" value="" type="number"
+                    min="0" onchange="minmax('Water')">
+                <button class="info" id="WaterInfo"
+                    onclick="information('This is your monthly payments for your water bill')">ℹ️</button>
+                <br><br><br><output>Gas = £</output><input id="Gas" placeholder="Gas Bill" value="" type="number"
+                    min="0" onchange="minmax('Gas')">
+                <button class="info" id="GasInfo"
+                    onclick="information('This is your monthly payments for your gas bill')">ℹ️</button>
+
+            </div>
+
+
+
+            <div id="Personal" style="text-align: end;">
+                <h3 style="text-align: center;">Personal</h3>
+                <br><output>Savings = £</output><input id="Savings" placeholder="Savings" value="" type="number" min="0"
+                    onchange="minmax('Savings')">
+                <button class="info" id="SavingsInfo"
+                    onclick="information('This is your monthly savings, the amount you set aside for future use.')">ℹ️</button>
+                <br><br><br><output>Clothing = £</output><input id="Clothing" placeholder="Clothing Costs" value=""
+                    type="number" min="0" onchange="minmax('Clothing')">
+                <button class="info" id="ClothingInfo"
+                    onclick="information('This is your monthly clothing costs, the amount you spend on clothes and accessories.')">ℹ️</button>
+                <br><br><br><output>Phone = £</output><input id="Phone" placeholder="Phone Bill" value="" type="number"
+                    min="0" onchange="minmax('Phone')">
+                <button class="info" id="PhoneInfo"
+                    onclick="information('This is your monthly phone bill, the amount you pay for your mobile phone service.')">ℹ️</button>
+                <br><br><br><output>Subscriptions = £</output><input id="Subs" placeholder="Subscriptions Costs"
+                    value="" type="number" min="0" onchange="minmax('Subs')">
+                <button class="info" id="SubscriptionsInfo"
+                    onclick="information('This is your monthly subscription costs, the amount you pay for services like streaming or software.')">ℹ️</button>
+
+            </div>
+
+
+            <div id="Food" style="text-align: end;">
+                <h3 style="text-align: center;">Food</h3>
+                <br><output>Groceries = £</output><input id="Groceries" placeholder="Monthly Groceries Cost" value=""
+                    type="number" min="0" onchange="minmax('Groceries')">
+                <button class="info" id="GroceriesInfo"
+                    onclick="information('This is your monthly groceries cost, the amount you spend on food and household supplies.')">ℹ️</button>
+                <br><br><br><output>Eating Out = £</output><input id="Eat-Out" placeholder="Eating-out Fund" value=""
+                    type="number" min="0" onchange="minmax('Eat-Out')">
+                <button class="info" id="EatingOutInfo"
+                    onclick="information('This is your monthly eating-out fund, the amount you spend on dining at restaurants or ordering takeout.')">ℹ️</button>
+            </div>
+
+            <br><br><br><button type="button" id="ExpenseSubmit" onclick="TotalExpense()">Submit</button>
+
+
+            <!-- Custom Expenses-->
+            <button id="CustomExpense" onclick="CustomCategory('expense')">Add Custom Item</button>
+            <br><br><br><input id="CustomExpense1" style="display: none;" value="0" placeholder="Enter Custom Expense" onchange="minmax('CustomExpense1')">
+            <button id="RemoveCustomExpense1" style="display:none;"
+                onclick="RemoveCustom('CustomExpense1', 'RemoveCustomExpense1')">Remove</button>
+            <br><br><br><input id="CustomExpense2" style="display: none;" value="0" placeholder="Enter Custom Expense" onchange="minmax('CustomExpense2')">
+            <button id="RemoveCustomExpense2" style="display:none;"
+                onclick="RemoveCustom('CustomExpense2', 'RemoveCustomExpense2')">Remove</button>
+
+            <br><br><br><output id="TotalExpense"></output>
+        </div>
+
+
+
+        <!-- Savings -->
+        <div id="SavingsPage" style="display: none;">
+            <div id="SavingsInputs" style="text-align: center;">
+                <br><output>Amount In Savings = £</output>
+                <input id="Saved" placeholder="Amount In Savings" value="" type="number" min="0">
+
+                <br><br><br><output>Annual Interest Rate = %</output>
+                <input id="Interest" placeholder="Interest Rates" value="" type="number" min="0">
+
+                <br><br><br><output>Years Saving = </output>
+                <input id="Years" placeholder="Years Saving For" value="" type="number" min="0" max="5000"
+                    onchange="minmax('Years')">
+            </div>
+
+            <br><br><br>
+            <button id="Compound" onclick="CalcInterest('compound')">Compound</button>
+            <button id="Simple" onclick="CalcInterest('simple')">Simple</button>
+
+            <br><br><br>
+            <output id="Result"></output>
+
+            <!-- Graph -->
+            <br><br>
+            <div id="bar-graph" style="width: 700px; max-width: 100%;">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+
+
+
+        <!-- Dashboard -->
+        <div id="DashboardPage" style="display: none;">
+            <h2>Dashboard</h2>
+            <h3>Total Income</h3>
+            <output>£</output><output id="DashboardIncome">£</output>
+            <h3>Total Expense</h3>
+            <output>£</output><output id="DashboardExpense"></output>
+            <h3>Profit</h3>
+            <output>£</output><output id="Profit">0</output>
+            <div style="width: 500px; max-width: 100%;">
+                <canvas id="pie-chart"></canvas>
+            </div>
+
+
+        </div>
+
+        <!-- Main Menu Button CHANGE WHEN TESTING IS DONE -->
+        <br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('MainMenu'); MenuButton()"
+            style="display: inline-block;">Main Menu</button>
+
+        <!-- Logout Button -->
+        <br><br><button id="Logout" onclick="websiteGoTo('Login'); LogoutButton()"
+            style="display: none;">Logout</button>
 
     </div>
 </body>
+
+</html>
 
 <script src="NEA.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
