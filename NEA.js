@@ -1,7 +1,7 @@
 let Users = []
 let Passwords = []
 
-// Function that passes the users inputs into the users and passwords arrays.
+// Function that creates an account for the user (after validation).
 function RegisterUser(){
     let username = document.getElementById('NewUsername').value
     let password = document.getElementById('NewPassword').value
@@ -18,6 +18,8 @@ function RegisterUser(){
         return
     }
 
+    
+// If the username isnt taken, create an account and go to the login page
     else{
         Users.push(username)
         Passwords.push(password)
@@ -28,11 +30,14 @@ function RegisterUser(){
     }
 }
 
-// Checks the users and passwords arrays for the enterd details, and if found they go through to the main menu
-let presses=0
-function LoginUser(){
-    presses += 1
+function ClearInputs(){
+    document.getElementById('NewUsername').value = ""
+    document.getElementById('NewPassword').value = ""
+    document.getElementById('RegisterError').textContent = ""
+}
 
+// Checks the users and passwords arrays for the entered details, and if found at the same positions in the arrays, they login and go through to the main menu
+function LoginUser(){
     for(let i = 0; i < Users.length; i++){
         if(document.getElementById('Username').value == Users[i] && document.getElementById('Password').value == Passwords[i]){
             websiteGoTo('MainMenu')
@@ -49,6 +54,7 @@ function LoginUser(){
 // Function to Go to a different page
 let CurrentPageId = 'Login'
 function websiteGoTo(NextPageId){
+    // Hide current page and display the next page
     document.getElementById(CurrentPageId).style.display = "none"
     document.getElementById(NextPageId).style.display = "inline-block"
     
@@ -60,6 +66,7 @@ function websiteGoTo(NextPageId){
     if (NextPageId == 'MainMenu'){
         document.getElementById('Logout').style.display = "inline-block"
     }
+    // Hides the main menu button if the next page isn't the main menu
     if (NextPageId != 'MainMenu'){
         document.getElementById('Logout').style.display = "none"
     }
@@ -76,7 +83,7 @@ function MenuButton(){
     document.getElementById('Logout').style.display = "inline-block"
 }
 
-// Logout button, which hides itself and the menu button, and empties and username and password inputs.
+// Function for pressing the logout button, which hides itself and the menu button, and empties and username and password inputs, ready for the next login.
 function LogoutButton(){
     document.getElementById('Logout').style.display = "none"
     document.getElementById('Menu').style.display = "none"
@@ -85,12 +92,12 @@ function LogoutButton(){
 }
 
 
-// Function to Total and output the Incomes
+// Function to calculate the total of and output the Incomes
 let totalincome=0
 DashboardIncome=0
 function TotalIncome(){
 
-
+    // Take inputs
     wage=document.getElementById('wage').value
     Irregular=document.getElementById('IrregularIncome').value
 
@@ -101,9 +108,10 @@ function TotalIncome(){
     if(wage == "" || Irregular == "" || CustomIncome1 == "" || CustomIncome2 == ""){
         document.getElementById('TotalIncome').textContent='Please Enter Valid Data'
         document.getElementById('DashboardIncome').textContent=0+'  (Fields Empty)'
+        totalincome = 0
     }
     
-    // Turn all the inputs into numbers so they can be used in the calculation
+    // Turn all the inputs into numbers so they can be used in the calculation, prevents = NaN
     
     else{
         wage=Number(wage)
@@ -112,6 +120,7 @@ function TotalIncome(){
         CustomIncome1=Number(CustomIncome1)
         CustomIncome2=Number(CustomIncome2)
 
+        // Calculation and output of the total incomes
         totalincome=wage+Irregular+CustomIncome1+CustomIncome2
         document.getElementById('TotalIncome').textContent='Total income = £' + totalincome.toFixed(2)
         document.getElementById('DashboardIncome').textContent = totalincome.toFixed(2)
@@ -129,6 +138,7 @@ let totalexpense=0
 DashboardExpense=0
 function TotalExpense(){
 
+    // Takes all the inputs
     rent=document.getElementById('Rent').value
     electric=document.getElementById('Electric').value
     water=document.getElementById('Water').value
@@ -145,7 +155,7 @@ function TotalExpense(){
     CustomExpense1=document.getElementById('CustomExpense1').value
     CustomExpense2=document.getElementById('CustomExpense2').value    
 
-    // Validation, checking if any of the inputs are empty
+    // Validation, checking if any of the inputs are empty strings. Clears the pie chart if they are.
 
     if(rent == "" || 
     electric == "" || 
@@ -162,6 +172,8 @@ function TotalExpense(){
 
         document.getElementById('TotalExpense').textContent='Please Enter Valid Data'
         document.getElementById('DashboardExpense').textContent=0+ '    (Fields Empty)'
+        totalexpense = 0
+        pievalues = [0,0,0,0,0,0,0,0,0,0,0,0]
     }
     
     // Turn all the inputs into numbers so they can be used in the calculation
@@ -184,7 +196,7 @@ function TotalExpense(){
         CustomExpense1=Number(CustomExpense1),
         CustomExpense2=Number(CustomExpense2)
     ]
-
+        // Calculate the total expenses and output, with rounding incase of decimals
         totalexpense=rent+electric+gas+water+clothing+phone+subs+savings+groceries+eatOut+CustomExpense1+CustomExpense2
         document.getElementById('TotalExpense').textContent='Total expense = £' + totalexpense.toFixed(2)
         document.getElementById('DashboardExpense').textContent = totalexpense.toFixed(2)
@@ -200,7 +212,7 @@ function TotalExpense(){
 
 
 // Function that displays the hidden custom inputs
-// Checks to see if the first category is showing before showing the second, allowing for them to be added individually
+// Checks to see if the first custom input is showing before showing the second, allowing for them to be added individually
 function CustomCategory(type){
     if(type=='income'){
         check = document.getElementById('CustomIncome1').style.display
@@ -436,15 +448,9 @@ function information(message) {
    alert(message); 
 }
 
-// Doesnt work
-function uservalues(username){
-    values=[pievalues, totalincome, totalexpense]
-}
 
-let exparray = []
-function addtoarray(id){
-    exparray.push(document.getElementById(id))
-}
+
+
 
 
 // Prevents the user entering negative numbers, and stops the website crashing from too many points on the interest graph

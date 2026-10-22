@@ -37,7 +37,6 @@ body {
 
     margin: 0 auto;
 
-    /* REMOVE transform */
 }
 
 
@@ -146,7 +145,3 @@ input {
     vertical-align: top;
 }
 
-
-#bar-graph {
-    color: blue;
-}

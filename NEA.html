@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEA</title>
+    <title>Budgeting!</title>
     <link rel="stylesheet" href="NEA.css">
 </head>
 
 <body>
 
     <div id="box">
-        <h1>Budgeting</h1>
+        <h1>Budget Basics</h1>
 
         <!-- Login page -->
         <div id="Login">
@@ -21,7 +21,7 @@
             <input id="Password" placeholder="Password" value="" type="password">
             <br><br><br><br>
             <button id="LoginButton" onclick="LoginUser()">Login</button><br><br><br>
-            <button id="RegisterButton" onclick="websiteGoTo('Register')">Create Account</button>
+            <button id="RegisterPageButton" onclick="websiteGoTo('Register'); ClearInputs()">Create Account</button>
             <br><br><br>
             <output id="LoginError"></output>
         </div>
@@ -67,7 +67,7 @@
             <br><br><br><button id="IncomeSubmit" onclick="TotalIncome()">Submit</button>
 
 
-            <!-- Custom Incomes-->
+            <!-- Custom Incomes and Remove Custom Incomes -->
             <button id="CustomIncome" onclick="CustomCategory('income')">Add Custom Item</button>
             <br><br><br><input id="CustomIncome1" style="display: none;" value="0" type="number" min="0" 
                 placeholder="Enter Custom Income" onchange="minmax('CustomIncome1')">
@@ -88,7 +88,7 @@
         <div id="ExpensesPage" style="display: none;">
             <h2>Expenses</h2>
 
-
+            <!-- Housing Expenses sub-section -->
             <div id="Housing" style="text-align: end;">
                 <h3 style="text-align: center;">Housing</h3>
                 <br><output>Mortgage/Rent = £</output><input id="Rent" placeholder="Monthly rent" value="" type="number"
@@ -111,7 +111,7 @@
             </div>
 
 
-
+            <!-- Personal Expenses sub-section -->
             <div id="Personal" style="text-align: end;">
                 <h3 style="text-align: center;">Personal</h3>
                 <br><output>Savings = £</output><input id="Savings" placeholder="Savings" value="" type="number" min="0"
@@ -133,7 +133,7 @@
 
             </div>
 
-
+                <!--Food Expenses sub-section -->
             <div id="Food" style="text-align: end;">
                 <h3 style="text-align: center;">Food</h3>
                 <br><output>Groceries = £</output><input id="Groceries" placeholder="Monthly Groceries Cost" value=""
@@ -149,7 +149,7 @@
             <br><br><br><button type="button" id="ExpenseSubmit" onclick="TotalExpense()">Submit</button>
 
 
-            <!-- Custom Expenses-->
+            <!-- Custom Expenses and Remove Custom Expenses -->
             <button id="CustomExpense" onclick="CustomCategory('expense')">Add Custom Item</button>
             <br><br><br><input id="CustomExpense1" style="display: none;" value="0" placeholder="Enter Custom Expense" onchange="minmax('CustomExpense1')">
             <button id="RemoveCustomExpense1" style="display:none;"
@@ -177,6 +177,7 @@
                     onchange="minmax('Years')">
             </div>
 
+                <!-- Buttons to select either Compound or Simple interest -->
             <br><br><br>
             <button id="Compound" onclick="CalcInterest('compound')">Compound</button>
             <button id="Simple" onclick="CalcInterest('simple')">Simple</button>
@@ -184,7 +185,7 @@
             <br><br><br>
             <output id="Result"></output>
 
-            <!-- Graph -->
+            <!-- Creating the space for the Interest graphs -->
             <br><br>
             <div id="bar-graph" style="width: 700px; max-width: 100%;">
                 <canvas id="myChart"></canvas>
@@ -202,6 +203,8 @@
             <output>£</output><output id="DashboardExpense"></output>
             <h3>Profit</h3>
             <output>£</output><output id="Profit">0</output>
+
+            <!-- Creating the space for the dashboard Pie chart-->
             <div style="width: 500px; max-width: 100%;">
                 <canvas id="pie-chart"></canvas>
             </div>
@@ -209,9 +212,9 @@
 
         </div>
 
-        <!-- Main Menu Button CHANGE WHEN TESTING IS DONE -->
+        <!-- Main Menu Button -->
         <br><br><br><br><br><br><button id="Menu" onclick="websiteGoTo('MainMenu'); MenuButton()"
-            style="display: inline-block;">Main Menu</button>
+            style="display: none;">Main Menu</button>
 
         <!-- Logout Button -->
         <br><br><button id="Logout" onclick="websiteGoTo('Login'); LogoutButton()"
